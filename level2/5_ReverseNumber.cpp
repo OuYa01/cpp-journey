@@ -1,6 +1,11 @@
 #include <iostream>
 using namespace std;
 
+/**
+ * ReadNumber - this function just to read a number from user
+ * 
+ * Return : the number that get from user
+ */
 int ReadNumber()
 {
     int number;
@@ -11,6 +16,13 @@ int ReadNumber()
     return (number);
 }
 
+/**
+ * ReverseNumber - this function reverses the digits of a number
+ * 
+ * @param n : the number to be reversed
+ * 
+ * Return : the reversed number
+ */
 int ReverseNumber(int n)
 {
     int remainder = 0;

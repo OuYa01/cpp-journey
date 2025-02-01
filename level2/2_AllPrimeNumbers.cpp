@@ -1,5 +1,11 @@
 #include <iostream>
 using namespace std;
+
+/**
+ * ReadNumber - this function just to read a number from user
+ * 
+ * Return : the number that get from user
+ */
 int ReadNumber()
 {
     int number;
@@ -10,6 +16,12 @@ int ReadNumber()
     return (number);
 }
 
+/**
+ * PrimeNumber - Checks if a number is a prime number.
+ * @n The integer to check for primality.
+ * 
+ * return : true If the number is a prime number, or false If the number is not a prime number.
+ */
 bool PrimeNumber(int n)
 {
     int i;
@@ -21,6 +33,11 @@ bool PrimeNumber(int n)
     return (true);
 }
 
+/**
+ * PrintAllPrimeNumbers - this function prints all prime numbers up to a given number N 
+ * @N: the upper limit up to which prime numbers are to be printed
+ * 
+ */
 void PrintAllPrimeNumbers(int N)
 {
     int i;
@@ -30,6 +47,8 @@ void PrintAllPrimeNumbers(int N)
             cout << i<< " Its A Prime Number\n";
     }
 }
+
+
 
 int main()
 {

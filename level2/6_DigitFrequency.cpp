@@ -1,6 +1,11 @@
 #include <iostream>
 using namespace std;
 
+/**
+ * ReadNumber - this function just to read a number from user
+ * 
+ * Return : the number that get from user
+ */
 int ReadNumber()
 {
     int number;
@@ -13,6 +18,14 @@ int ReadNumber()
 
 
 
+/**
+ * CountDigitFrequency - this function counts the frequency of a specific digit in a number
+ * 
+ * @DigitToCheck : the digit to count in the number
+ * @n : the number in which to count the digit
+ * 
+ * Return : the frequency of the digit in the number
+ */
 int CountDigitFrequency(short DigitToCheck, int n)
 {
     int remainder;
@@ -27,6 +40,11 @@ int CountDigitFrequency(short DigitToCheck, int n)
     return (count);
 }
 
+/**
+ * PrintAllDigitsFrequencey - this function prints the frequency of all digits (0-9) in a number
+ * @n : the number in which to count the digits
+ * 
+ */
 void PrintAllDigitsFrequencey(int n)
 {
     int i, DigitFrequency;
@@ -34,8 +52,8 @@ void PrintAllDigitsFrequencey(int n)
     for (i = 0; i < 10; i++)
     {
         DigitFrequency = CountDigitFrequency(i, n);
-        if ( DigitFrequency > 0)
-            cout << "Digit "<< i << " Frequencey is " << DigitFrequency << "Time(s)\n";
+        if (DigitFrequency > 0)
+            cout << "Digit " << i << " Frequency is " << DigitFrequency << " Time(s)\n";
     }
 }
 

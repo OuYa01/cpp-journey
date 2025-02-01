@@ -1,7 +1,11 @@
 #include <iostream>
 using namespace std;
 
-
+/**
+ * ReadNumber - this function just to read a number from user
+ * 
+ * Return : the number that get from user
+ */
 int ReadNumber()
 {
     int number;
@@ -13,6 +17,13 @@ int ReadNumber()
 }
 
 
+/**
+ * ReverseNumber - this function reverses the digits of a number
+ * 
+ * @n : the number to be reversed
+ * 
+ * Return : the reversed number
+ */
 int ReverseNumber(int n)
 {
     int remainder = 0;
@@ -27,6 +38,13 @@ int ReverseNumber(int n)
     return (Rnumber);
 }
 
+/**
+ * PalindromeNumber - this function checks if a number is a palindrome
+ * 
+ * @n : the number to be checked
+ * 
+ * Return : true if the number is a palindrome, false otherwise
+ */
 bool PalindromeNumber(int n)
 {
     int temp = ReverseNumber(n);

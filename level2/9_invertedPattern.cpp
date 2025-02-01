@@ -1,7 +1,11 @@
 #include <iostream>
 using namespace std;
 
-
+/**
+ * ReadNumber - this function just to read a number from user
+ * 
+ * Return : the number that get from user
+ */
 int ReadNumber()
 {
     int number;
@@ -13,6 +17,10 @@ int ReadNumber()
 }
 
 
+/**
+ * printInvertedPattern - this function prints an inverted pattern of numbers
+ * @n : the number of rows for the pattern
+ */
 void printInvertedPattern(int n)
 {
     int i, j;
@@ -28,6 +36,10 @@ void printInvertedPattern(int n)
     }
 }
 
+/**
+ * printInvertedPattern2 - this function prints an inverted pattern of numbers
+ * @n : the number of rows for the pattern
+ */
 void printInvertedPattern2(int n)
 {
     int i, j;
