@@ -28,7 +28,7 @@ string EncryptText(string str, short EncryptionKey)
 {
     int i;
 
-    for (i = 0; i <= str.length(); i++)
+    for (i = 0; i < str.length(); i++)
     {
         str[i] = str[i] + EncryptionKey;
     }
@@ -47,7 +47,7 @@ string DecryptText(string str, short EncryptionKey)
 {
     int i;
 
-    for (i = 0; i <= str.length(); i++)
+    for (i = 0; i < str.length(); i++)
     {
         str[i] = str[i] - EncryptionKey;
     }
