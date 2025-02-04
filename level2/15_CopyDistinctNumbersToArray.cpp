@@ -2,21 +2,18 @@
 
 using namespace std;
 
-void FillArray(int arr[100], int &arrLength)
+void FillArray(int arr[100], int arrLength)
 {
-    arrLength = 12;
-    arr[0] = 10;
-    arr[1] = 10;
-    arr[2] = 10;
-    arr[3] = 50;
-    arr[4] = 50;
-    arr[5] = 70;
-    arr[6] = 70;
-    arr[7] = 70;
-    arr[8] = 70;
-    arr[9] = 90;
-    arr[10] = 2;
-    arr[11] = 2;
+    int i;
+
+    i = 0;
+    do
+    {
+        cout << "Arr[" << i+1 << "] : ";
+        cin >> arr[i];
+        i++;
+        
+    } while(i!=arrLength);
 }
 
 
@@ -114,8 +111,8 @@ void CopyDistinctNumbersToArray(int arrSource[100], int arrDestinantion[100], in
  */
 int main(void)
 {
-    int arrSouce[100], sourceLength = 0, arrDestinantion[100], DestinantionLenght = 0;
-    FillArray(arrSouce, sourceLength);
+    int arrSouce[100], sourceLength = 10, arrDestinantion[100], DestinantionLenght = 0;
+    FillArray(arrSouce, 10);
 
     cout << "Arr1: Elements :\n";
     PrintArray(arrSouce, sourceLength);
