@@ -7,7 +7,7 @@ enum levels {easy = 1, meduim = 2, hard = 3, mix = 4};
 
 enum operations {Add = 1, Sub = 2, Mul = 3, Div = 4, Mix = 5};
 
-enum Results {Pass = 1, Fail = 2};
+
 
 
 struct stQstInfo
@@ -78,6 +78,21 @@ void ResetScreen()
     system("color 0F");
 }
 
+
+void setResultScreenColore(bool Awnser)
+{
+    switch (Awnser)
+    {
+        case true :
+            system("color 2F"); //turn screen to Green
+            break;
+        case false :
+            system("color 4F"); //turn screen to Red
+            cout << "\a";
+            break;
+    }
+}
+
 short NumberOfQuestions()
 {
     short NumberOfqsts;
@@ -115,7 +130,7 @@ operations OperationType()
     cout << "Enter operation type : [1] Add, [2] Sub, [3] Mul, [4] Div, [5] Mix? ";
     cin >> OpLvl;
 
-    while (OpLvl < 1 || OpLvl > 4)
+    while (OpLvl < 1 || OpLvl > 5)
     {
         cout << "Oops! You entered a number out of the range. Please try again.\n";
         cout << "Enter operation type : [1] Add, [2] Sub, [3] Mul, [4] Div, [5] Mix? ";
@@ -126,24 +141,7 @@ operations OperationType()
 }
 
 
-void PlayQuiz(stQuizAppInfo &QuizAppInfo)
-{
-    short NumberOfQst;
-    stQstInfo QstInfo;
-    QuizAppInfo.QstLvl = QuizLevel();
-    QuizAppInfo.OpType = OperationType();
-    for (NumberOfQst = 1; NumberOfQst <= QuizAppInfo.numberOfQsts; NumberOfQst++)
-    {
-        QstInfo = QuestionsGenerator(NumberOfQst, QuizAppInfo.QstLvl ,QuizAppInfo.OpType);
-        if (QstInfo.pass == true)  QuizAppInfo.CorrectAwnsers += 1;
-        else QuizAppInfo.WrongAwnsers += 1;
 
-    }
-    if (QuizAppInfo.CorrectAwnsers >= QuizAppInfo.WrongAwnsers)
-        QuizAppInfo.pass = true;
-    else
-        QuizAppInfo.pass = false;
-}
 
 
 short MadeQuestion(short operand1, short operand2, operations OpType)
@@ -193,25 +191,70 @@ void EasyQuestion(stQstInfo &QstInfo)
         QstInfo.UserAwnser = GetUserAwnser();
         QstInfo.pass = ItsACorrectAwnser(QstInfo.UserAwnser, QstInfo.CorrectAwnser);
     }
-    // else
-    // {
-
-    // }
+    else
+    {
+        int RandomOperation = RandomNumbers(1, 4);
+        QstInfo.CorrectAwnser = MadeQuestion(QstInfo.operand1, QstInfo.operand2, (operations)RandomOperation);
+        QstInfo.UserAwnser = GetUserAwnser();
+        QstInfo.pass = ItsACorrectAwnser(QstInfo.UserAwnser, QstInfo.CorrectAwnser);
+    }
 }
 
 void MeduimQuestion(stQstInfo &QstInfo)
 {
+    QstInfo.operand1 = RandomNumbers(10, 99);
+    QstInfo.operand2 = RandomNumbers(10, 99);
     
+    if (QstInfo.OpType != operations::Mix)
+    {
+        QstInfo.CorrectAwnser = MadeQuestion(QstInfo.operand1, QstInfo.operand2, QstInfo.OpType);
+        QstInfo.UserAwnser = GetUserAwnser();
+        QstInfo.pass = ItsACorrectAwnser(QstInfo.UserAwnser, QstInfo.CorrectAwnser);
+    }
+    else
+    {
+        int RandomOperation = RandomNumbers(1, 4);
+        QstInfo.CorrectAwnser = MadeQuestion(QstInfo.operand1, QstInfo.operand2, (operations)RandomOperation);
+        QstInfo.UserAwnser = GetUserAwnser();
+        QstInfo.pass = ItsACorrectAwnser(QstInfo.UserAwnser, QstInfo.CorrectAwnser);
+    }
 }
 
 void HardQuestion(stQstInfo &QstInfo)
 {
+    QstInfo.operand1 = RandomNumbers(100, 999);
+    QstInfo.operand2 = RandomNumbers(100, 999);
     
+    if (QstInfo.OpType != operations::Mix)
+    {
+        QstInfo.CorrectAwnser = MadeQuestion(QstInfo.operand1, QstInfo.operand2, QstInfo.OpType);
+        QstInfo.UserAwnser = GetUserAwnser();
+        QstInfo.pass = ItsACorrectAwnser(QstInfo.UserAwnser, QstInfo.CorrectAwnser);
+    }
+    else
+    {
+        int RandomOperation = RandomNumbers(1, 4);
+        QstInfo.CorrectAwnser = MadeQuestion(QstInfo.operand1, QstInfo.operand2, (operations)RandomOperation);
+        QstInfo.UserAwnser = GetUserAwnser();
+        QstInfo.pass = ItsACorrectAwnser(QstInfo.UserAwnser, QstInfo.CorrectAwnser);
+    }
 }
 
 void MixQuestion(stQstInfo &QstInfo)
 {
-    
+    int QstLvl = RandomNumbers(1, 3);
+    switch (QstLvl)
+    {
+        case 1 :
+            EasyQuestion(QstInfo);
+            break;
+        case 2 :
+            MeduimQuestion(QstInfo);
+            break;
+        case 3 :
+            HardQuestion(QstInfo);
+            break;
+    }
 }
 
 short GetUserAwnser()
@@ -223,14 +266,14 @@ short GetUserAwnser()
 }
 
 
-stQstInfo QuestionsGenerator(short NumberOfQst , levels QuestionsLevel, operations OpType)
+stQstInfo QuestionsGenerator(short NumberOfQsts , short NumberOfQst, levels QuestionsLevel, operations OpType)
 {
     stQstInfo QstInfo;
     QstInfo.numberOfQst = NumberOfQst;
     QstInfo.OpType = OpType;
     QstInfo.QstLvl = QuestionsLevel;
 
-    cout << "Qst" << NumberOfQst << endl;
+    cout << "\n\nQuestion [" << NumberOfQst << "/" << NumberOfQsts << "]" << endl;
     switch (QuestionsLevel)
     {
         case levels::easy :
@@ -250,6 +293,30 @@ stQstInfo QuestionsGenerator(short NumberOfQst , levels QuestionsLevel, operatio
     return QstInfo;
 }
 
+
+void PlayQuiz(stQuizAppInfo &QuizAppInfo)
+{
+    short NumberOfQst;
+    stQstInfo QstInfo;
+    QuizAppInfo.QstLvl = QuizLevel();
+    QuizAppInfo.OpType = OperationType();
+    for (NumberOfQst = 1; NumberOfQst <= QuizAppInfo.numberOfQsts; NumberOfQst++)
+    {
+        QstInfo = QuestionsGenerator(QuizAppInfo.numberOfQsts ,NumberOfQst, QuizAppInfo.QstLvl ,QuizAppInfo.OpType);
+        if (QstInfo.pass == true)  QuizAppInfo.CorrectAwnsers += 1;
+        else QuizAppInfo.WrongAwnsers += 1;
+        setResultScreenColore(QstInfo.pass);
+
+    }
+    if (QuizAppInfo.CorrectAwnsers >= QuizAppInfo.WrongAwnsers)
+        QuizAppInfo.pass = true;
+    else
+        QuizAppInfo.pass = false;
+        
+    setResultScreenColore(QuizAppInfo.pass);
+    
+}
+
 void StartQuiz()
 {
     char StartAgain = 'Y';
@@ -264,8 +331,9 @@ void StartQuiz()
         cout << "Do you want To play Again? (Y/N) ";
         cin >> StartAgain;
 
-    } while (StartAgain != 'Y' || StartAgain != 'y');
+    } while (StartAgain == 'Y' || StartAgain == 'y');
 
+    ResetScreen();
 }
 
 void printfFinalResults(stQuizAppInfo QuizzAppInfo)
@@ -292,7 +360,7 @@ string PrintQstlvl(levels Qstlvl)
 
 string PrintOperationType(operations OpType)
 {
-    string arr[4] {"Add", "Sub", "Mul", "Div"};
+    string arr[5] {"Add", "Sub", "Mul", "Div", "Mix"};
 
     return (arr[OpType - 1]);
 }
