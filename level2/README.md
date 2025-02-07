@@ -1,6 +1,6 @@
 # Level 2: Intermediate Problems in C++
 
-This directory contains more advanced problems, focusing on loops, conditions, mathematical operations, and array manipulation. These exercises help me improve my problem-solving skills and prepare for more complex programming tasks.
+This folder contains solutions to intermediate-level C++ problems. These problems helped me learn about arrays, algorithms, and more complex logic.
 
 
 ### 📂 **Solved Problems**

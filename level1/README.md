@@ -1,6 +1,6 @@
 # Level 1: Basic Problems in C++
 
-In this directory, I will solve basic problems using C++ to learn new concepts in the language. I already have a strong understanding of C, having solved many problems (easy, medium, and hard) in it. After this, I plan to start learning Object-Oriented Programming (OOP) in C++, which is the main reason I began learning C++ in the first place
+This folder contains my solutions to beginner-level C++ problems. These problems helped me understand fundamental concepts like variables, loops, conditionals, and functions.
 
 ### 📂 **Solved Problems**
 | #  | Filename                     | Description                           |
@@ -17,3 +17,5 @@ In this directory, I will solve basic problems using C++ to learn new concepts i
 | 10 | `10_CommissionPercentage.cpp` | Calculating commission percentage    |
 | 11 | `11_calculation.cpp`          | Performing arithmetic operations     |
 | 12 | `12_pin.cpp`                  | PIN verification program             |
+
+**Next Step:** Move on to **Level 2** for more challenging problems!

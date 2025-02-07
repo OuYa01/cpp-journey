@@ -1,5 +1,21 @@
 # cpp-journey
-A personal repository documenting my journey of learning C++ from scratch. This repo contains practice exercises, projects, and notes as I progress through a C++ course, focusing on mastering the fundamentals and exploring advanced concepts.
+Welcome to my C++ learning repository! This repo documents my progress as I learn C++ by solving problems and building projects. It is organized into levels, with each level representing a step forward in my understanding of C++.
+
+
+## Structure
+- **`level1/`**: Basic C++ problems (e.g., loops, conditionals, functions).
+- **`level2/`**: Intermediate C++ problems (e.g., arrays, algorithms).
+- **`projects/`**: Practical projects built using skills from each level.
+
+
+## How to Navigate
+1. Check out the `README.md` in each folder for details about its contents.
+2. Problems are organized by level, and projects are tied to the skills learned in those levels.
+
+
+---
+
+**Happy Coding \(:**
 
 ## What is c++ ?
 C++ is a **general-purpose programming language** developed by **Bjarne Stroustrup** in 1983. It is an extension of the **C language** with added features such as **object-oriented programming**, **templates**, **exception handling**, and more. C++ is widely used in software development for applications that require high performance and precise control over system resources.
