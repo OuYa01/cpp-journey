@@ -22,9 +22,26 @@ This is a CLI-based math quiz app that tests your arithmetic skills.
   - Whether the user passed or failed.
 - Ask the user if they want to play again (Y/N).
 
+## Project Structure
+```bash
+/2_MathQuizApp
+│── Config.cpp      # Handles quiz settings (difficulty, operations, question count)
+│── helpers.cpp     # Utility functions (random number generation, screen clearing)
+│── main.cpp        # Entry point of the application
+│── questions.cpp   # Logic for creating and validating questions
+│── quiz.cpp        # Controls quiz flow and displays results
+│── Quiz.h          # Shared structures and function declarations
+│── README.md       # Project documentation
+```
+
 ---
 
 ## How to Run
 1. Compile the program:
    ```bash
-   g++ MathQuizApp.cpp -o quiz
+   g++ main.cpp Config.cpp helpers.cpp questions.cpp quiz.cpp -o quiz
+   ```
+2. Run the compiled executable:
+  ```bash
+  ./quiz
+  ```
