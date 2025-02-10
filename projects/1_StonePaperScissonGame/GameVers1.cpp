@@ -51,11 +51,21 @@ string Lines(short NumberOfLines)
 short HowManyRounds()
 {
     short rounds;
+
     cout << "How many rounds You Want to play (1 To 10)?\n";
     cin >> rounds;
 
+    while ((rounds < 1 || rounds > 10) && cin.fail())
+    {
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout << "How many rounds You Want to play (1 To 10)?\n";
+        cin >> rounds;
+    }
+
     return (rounds);
 }
+
 
 options PlayerChoice()
 {

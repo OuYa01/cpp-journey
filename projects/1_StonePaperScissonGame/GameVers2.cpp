@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include <ctime>
 
 using namespace std;
@@ -80,11 +81,17 @@ void setWinnerScreenColore(Results winner)
 short HowManyRounds()
 {
     short rounds;
-    do
+
+    cout << "How many rounds You Want to play (1 To 10)?\n";
+    cin >> rounds;
+
+    while ((rounds < 1 || rounds > 10) && cin.fail())
     {
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         cout << "How many rounds You Want to play (1 To 10)?\n";
         cin >> rounds;
-    } while (rounds < 1 || rounds > 10);
+    }
 
     return (rounds);
 }
