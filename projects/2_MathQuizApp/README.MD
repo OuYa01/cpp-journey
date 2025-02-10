@@ -39,9 +39,9 @@ This is a CLI-based math quiz app that tests your arithmetic skills.
 ## How to Run
 1. Compile the program:
    ```bash
-   g++ main.cpp Config.cpp helpers.cpp questions.cpp quiz.cpp -o quiz
+      g++ main.cpp Config.cpp helpers.cpp questions.cpp quiz.cpp -o quiz
    ```
 2. Run the compiled executable:
-  ```bash
-  ./quiz
-  ```
+    ```bash
+      ./quiz
+    ```
