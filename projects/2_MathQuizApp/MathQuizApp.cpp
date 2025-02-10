@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include <ctime>
 
 using namespace std;
@@ -161,8 +162,10 @@ short GetQuestionCount()
 
     cout << "Number of questions (1-20): ";
     cin >> count;
-    while (count < 1 || count > 20)
+    while ((count < 1 || count > 20) && cin.fail())
     {
+	cin.clear();
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         cout << "Invalid! Enter 1-20: ";
         cin >> count;
     }
