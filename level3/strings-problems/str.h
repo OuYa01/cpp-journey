@@ -14,5 +14,8 @@ string LowerCaseFirstLetter(string str);
 string LowerAllString(string str);
 string UpperAllString(string str);
 char InvertLetterCase(char char1);
+size_t _strlen(const std::string& s);
+size_t uppercase_length(const std::string& s);
+size_t lowercase_length(const std::string& str);
 
 #endif
