@@ -7,7 +7,7 @@ void PrintEachWordInString(std::string s)
 	short pos = 0;
 	string sword;
 
-	while ((pos = s.find(delim)) != std::string::pos)
+	while ((pos = s.find(delim)) != std::string::npos)
 	{
 		sword = s.substr(0, pos);
 
