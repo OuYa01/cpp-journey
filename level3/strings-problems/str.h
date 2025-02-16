@@ -23,4 +23,8 @@ char ToLower(char c);
 void PrintEachWordInString(std::string s);
 int CountEachWordInString(std::string s);
 std::vector<std::string> splitStringIntoVector(std::string s, std::string delim);
+std::string TrimLeft(std::string s);
+std::string TrimRight(std::string s);
+std::string Trim(std::string s);
+
 #endif
