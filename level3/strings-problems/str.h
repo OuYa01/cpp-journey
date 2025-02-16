@@ -1,9 +1,10 @@
-#ifndef MATRIX_H
-#define MATRIX_H
+#ifndef STR_H
+#define STR_H
 
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 
 using namespace std;
 
@@ -17,5 +18,9 @@ char InvertLetterCase(char char1);
 size_t _strlen(const std::string& s);
 size_t uppercase_length(const std::string& s);
 size_t lowercase_length(const std::string& str);
-
+bool IsVowel(char c);
+char ToLower(char c);
+void PrintEachWordInString(std::string s);
+int CountEachWordInString(std::string s);
+std::vector<std::string> splitStringIntoVector(std::string s, std::string delim);
 #endif
