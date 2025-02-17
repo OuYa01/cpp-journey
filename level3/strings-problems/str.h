@@ -26,5 +26,6 @@ std::vector<std::string> splitStringIntoVector(std::string s, std::string delim)
 std::string TrimLeft(std::string s);
 std::string TrimRight(std::string s);
 std::string Trim(std::string s);
+std::string JoinString(std::vector<string> v, string delim);
 
 #endif
