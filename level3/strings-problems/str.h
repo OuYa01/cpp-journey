@@ -28,5 +28,6 @@ std::string TrimRight(std::string s);
 std::string Trim(std::string s);
 std::string JoinString(std::vector<string> v, string delim);
 std::string JoinString(std::string arr[], short size, string delim);
+std::string ReverseString(std::string s1);
 
 #endif
