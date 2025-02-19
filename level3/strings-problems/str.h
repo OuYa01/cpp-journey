@@ -29,5 +29,7 @@ std::string Trim(std::string s);
 std::string JoinString(std::vector<string> v, string delim);
 std::string JoinString(std::string arr[], short size, string delim);
 std::string ReverseString(std::string s1);
+std::string RaplaceWordInString(std::string s1, std::string Sword, std::string Newword);
+std::string RaplaceWordInStringV2(std::string s1, std::string StringToReplace, std::string ReplaceTo);
 
 #endif
