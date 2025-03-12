@@ -21,8 +21,9 @@ std::string RaplaceWordInString(std::string s1, std::string StringToReplace, std
 std::string RaplaceWordInStringV2(std::string s1, std::string StringToReplace, std::string ReplaceTo)
 {
 	short pos = s1.find(StringToReplace);
-
-	while (pos != std::string::npos)
+	
+	//This loop runs as long as StringToReplace is found in s1.
+	while (pos != std::string::npos) //If StringToReplace is not found, s1.find() returns std::string::npos (which means "not found")
 	{
 		s1 = s1.replace(pos, StringToReplace.length(), ReplaceTo);
 		pos = s1.find(StringToReplace);
