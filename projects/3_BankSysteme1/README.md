@@ -14,7 +14,7 @@ This project implements a **Client Management System** that allows you to store,
 
 1. **Compile the program**:
    ```bash
-   g++ main.cpp client.cpp helpers.cpp -o client_management
+   g++ main.cpp  -o client_management
    ```
 
 2. **Run the program**:
@@ -96,7 +96,3 @@ B01#//#0000#//#Oussama#//#+212608095577#//#20000
 
 - The system allows only one client to be added at a time, but you can keep adding multiple clients one after the other.
 - The client data is stored permanently in `ClientsData.txt`, ensuring that information persists even after the program is closed.
-
----
-
-Feel free to adjust the instructions or add more details as needed for your project!
