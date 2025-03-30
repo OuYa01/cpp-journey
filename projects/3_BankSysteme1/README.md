@@ -9,17 +9,6 @@ This project implements a **Client Management System** that allows you to store,
 - **Delete a Client**: Remove a client from the system using their account number.
 - **Persistent Storage**: All client data is saved to a file (`ClientsData.txt`) for persistent storage.
 
-## File Structure
-
-```
-/ClientManagementSystem
-│── main.cpp               # Entry point of the application, handles user interaction.
-│── client.cpp             # Contains the logic for adding, deleting, and displaying clients.
-│── helpers.cpp            # Utility functions for data handling (e.g., converting data formats).
-│── client.h               # Header file for client structure and function declarations.
-│── ClientsData.txt        # File to store client data.
-│── README.md              # Project documentation.
-```
 
 ## How to Run
 
