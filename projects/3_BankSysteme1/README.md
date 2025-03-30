@@ -1,7 +1,3 @@
-Here's a README file based on your project description:
-
----
-
 # Project: Client Management System
 
 This project implements a **Client Management System** that allows you to store, manage, and retrieve client data. The data is saved in a text file, and you can perform various operations like adding, deleting, and viewing client information.
