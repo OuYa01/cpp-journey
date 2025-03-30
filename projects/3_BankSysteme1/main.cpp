@@ -8,6 +8,16 @@
 
 using namespace std;
 
+/**
+ * stClient - is a structur That will hold All Our data
+ * 
+ * @AccountNumber : Account Number of client
+ * @PinCode : Pin code of this client
+ * @Name : Full Name of Client
+ * @Phone Number : Phone Number Of Client
+ * @AccountBalance : How Many this Client Have
+ * 
+ */
 struct stClient
 {
     std::string AccountNumber;
@@ -17,8 +27,18 @@ struct stClient
     double accountBalance;
 };
 
+/*@FileName - Global Variable that have the Name of File will be our data in*/
 string FileName = "ClientsData.txt";
 
+
+/**
+ * SplitStringIntoVector - This will split A string into a Vector using separateur.
+ * 
+ * @RecordeLine : This is the line will be look smtg like that : "B01#//#0000#//#Oussama#//#+212608095577#//#20000".
+ * @separateur : the delimiter that separte data in this line.
+ * 
+ * Return : Vector of strings that has each data from this line
+ */
 vector<string> SplitStringIntoVector(string RecordeLine, string separateur = "#//#")
 {
     int pos;
@@ -34,18 +54,29 @@ vector<string> SplitStringIntoVector(string RecordeLine, string separateur = "#/
     return (vec);
 }
 
-
+/**
+ * ConverClientToRecordeLine - This Function will Convert Data of client in a struct to one line,
+ *                             Bcs It will help us a lot in our file to can get data from it again
+ * 
+ * @client - its a Structure That Hold All client Data.
+ * @separateur - That a separateur that we will Separte data with it in this line. Will look smtg like that
+ *               "B01#//#0000#//#Oussama#//#+212608095577#//#20000"
+ * 
+ * Return : The line That has all data
+ */
 string ConverClientToRecordeLine(stClient client, string separateur = "#//#")
 {
     return (client.AccountNumber + separateur + client.PinCode + separateur + client.Name + separateur + client.PhoneNumber + separateur + to_string(client.accountBalance) + '\n');
 }
 
-bool isNumber(const string& s)
-{
-    return !s.empty() && all_of(s.begin(), s.end(), ::isdigit);
-}
 
-
+/**
+ * convertClientRecordeToClient - Convert Client Recorde(Bcs in our File, Data looks Like one line) to Client structure
+ * 
+ * @RecordeLine : The line of data ~ its smtg like that "B01#//#0000#//#Oussama#//#+212608095577#//#20000"
+ * 
+ * Return : Client data 
+ */
 stClient convertClientRecordeToClient(string RecordeLine)
 {
     vector<string> vec = SplitStringIntoVector(RecordeLine);
@@ -65,6 +96,10 @@ stClient convertClientRecordeToClient(string RecordeLine)
     return Client;
 }
 
+
+/**
+ * PrintClientCard - It's Print One Client detiles(Data).
+ */
 void PrintClientCard(stClient& Client)
 {
     cout << "| " << left << setw(15) << Client.AccountNumber;
@@ -75,7 +110,15 @@ void PrintClientCard(stClient& Client)
     cout << "\n";
 }
 
-void ShowClientList(vector<stClient> AllClientsData)
+
+/**
+ * ShowClientList - This Function is Just To Show Client List
+ * 
+ * @AllClientData : This is a referance to a vector of structure 'stClient' that Have All Clients Data.
+ * 
+ * Return : Nothing
+ */
+void ShowClientList(vector<stClient>& AllClientsData)
 {
     cout << "\t\t\t\tClient List ("<< AllClientsData.size() << ") Client(s)\n";
     cout << "| " << left << setw(15) << "Account Number";
@@ -85,7 +128,7 @@ void ShowClientList(vector<stClient> AllClientsData)
     cout << "| " << left << setw(12) << "AccountBalance";
 
     cout << "\n";
-    for (stClient Client : AllClientsData)
+    for (stClient& Client : AllClientsData)
     {
         PrintClientCard(Client);
     }
@@ -93,7 +136,14 @@ void ShowClientList(vector<stClient> AllClientsData)
 
 
 
-
+/**
+ * ClientFound - This Function Is like  {FinClient} Function, But its just simple, bcs we will use it a lot in other functions
+ * 
+ * @AllClientData : This is a referance to a vector of structure 'stClient' that we will check if Client are in it or not.
+ * @TargetAccountNumber : This is a referance to A string that have the target account number that we want To serach about.
+ * 
+ * Return : True if Client Found, otherwise False
+ */
 bool ClientFound(vector<stClient>& AllClientsData, string& TargetAccountNumber, stClient& client)
 {
     int i;
@@ -110,6 +160,14 @@ bool ClientFound(vector<stClient>& AllClientsData, string& TargetAccountNumber, 
     return (false);
 }
 
+/**
+ * FinClient - This function checks if the client is already in our data using their Target Account Number.
+ *             If we find the client, we display their details. If not, we say that the client was not found.
+ * 
+ * @AllClientData : This is a referance to a vector of structure 'stClient' that we will check if Client are in it or not.
+ * 
+ * Return : Nothing
+ */
 void FindClient(vector<stClient>& AllClientsData)
 {
     string TargetAccountNumber;
@@ -135,6 +193,12 @@ void FindClient(vector<stClient>& AllClientsData)
     cout << "Client with account number : " << TargetAccountNumber << " is not found!\n";
 }
 
+/**
+ * AddClient - This Fuction is to Add Client, By collect all it Data, and add it to the file and the Vector
+ * @AllClientData : This is a referance to a vector of structure 'stClient' to Add Client To it.
+ *
+ * Retunr : Nothing
+ */
 void AddClient(vector<stClient>& AllClientsData)
 {
     stClient Client;
@@ -187,6 +251,14 @@ void AddClient(vector<stClient>& AllClientsData)
 }
 
 
+/**
+ * DeletClient - This Function Delet Client from Vector using Target Account Number.
+ * 
+ * @AllClientData : This is a referance to a vector of structure 'stClient' to Delet Client From it.
+ * @TargetAccountNumber : This is a referance to A string that have the target account number that we want to Delet
+ * 
+ * Retunr : Nothing
+ */
 void DeletClient(vector<stClient>& AllClientsData, string& TargetAccountNumber)
 {
     int i;
@@ -204,6 +276,13 @@ void DeletClient(vector<stClient>& AllClientsData, string& TargetAccountNumber)
 
 
 
+/**
+ * LoadAllDataFromVecToFile - Load All Data from Vector to file, bcs when we update a data in our programme
+ *                            We Update it just in the vectore so we need to make it back to our file
+ * @AllClientData : This is a referance to a vector of structure 'stClient' to Update Data in it and send it back to file
+ * 
+ * Return : Nothing
+ */
 void LoadAllDataFromVecToFile(vector<stClient>& AllClientsData)
 {
     ofstream ClientDataFile(FileName);
@@ -215,6 +294,17 @@ void LoadAllDataFromVecToFile(vector<stClient>& AllClientsData)
 }
 
 
+/**
+ * LoadAllClientsDataFromFile - Load All Clients Data From File To vector, This Function will help us,
+ *                              bcs When programme ends data will stay always in File, But vectore will
+ *                              Forget all the data, so we need always when start the programme To load
+ *                              This data from file to Vector
+ * 
+ * @AllClientData : This is a referance to a vector of structure 'stClient' to Update Data in it and send it back to file
+ * 
+ * Return : Nothing
+ *                              
+ */
 void LoadAllClientsDataFromFile(vector<stClient>& AllDataClients)
 {
     ifstream ClienData;
@@ -239,6 +329,13 @@ void LoadAllClientsDataFromFile(vector<stClient>& AllDataClients)
 }
 
 
+/**
+ * DeletClientByAccountNumber - To Delet Client Data in file and vector using Target account Number.
+ * 
+ * @AllClientData : This is a referance to a vector of structure 'stClient' to Update Data in it and send it back to file
+ * 
+ * Return : Nothing
+ */
 void DeletClientByAccountNumber(vector<stClient>& AllClientsData)
 {
     stClient client;
@@ -270,7 +367,15 @@ void DeletClientByAccountNumber(vector<stClient>& AllClientsData)
 
 }
 
-
+/**
+ * UpdateClient - This is a subfunction of {UpateClientDataByAccountNumber} function,
+ *                Is just to get information from user to update them
+ * 
+ * @AllClientData : This is a referance to a vector of structure 'stClient' to Update Data in it and send it back to file
+ * @TargetAccountNumber : This is a referance to A string that have the target account number that we want to update
+ * 
+ * Return : Nothing
+ */
 void UpdateClient(vector<stClient>& AllClientsData, string& TargetAccountNumber)
 {
 
@@ -294,6 +399,14 @@ void UpdateClient(vector<stClient>& AllClientsData, string& TargetAccountNumber)
 
 }
 
+
+/**
+ * UpateClientDataByAccountNumber - To update Client Data in file and vector using Target account Number.
+ * 
+ * @AllClientData : This is a referance to a vector of structure 'stClient' to Update Data in it and send it back to file
+ * 
+ * Return : Nothing
+ */
 void UpateClientDataByAccountNumber(vector<stClient>& AllClientsData)
 {
     stClient client;
@@ -325,7 +438,9 @@ void UpateClientDataByAccountNumber(vector<stClient>& AllClientsData)
     cout << "\nClient Not Found!!\n";
 }
 
-
+/**
+ * showMenueScreen - Menue Screen for print
+ */
 void showMenueScreen()
 {
     cout << "===============================================\n";
@@ -342,6 +457,10 @@ void showMenueScreen()
 
 }
 
+
+/**
+ * ExitMenue - Just small thing to print when user want to Exit
+ */
 void ExitMenue()
 {
     cout << "----------------------------------------------------------\n";
@@ -350,6 +469,11 @@ void ExitMenue()
 }
 
 
+/**
+ * BackToMenu - When a function end in this systeme its shows this to u can see the output,
+ *              Then if you want u can back to main menue by Press any key
+ * 
+ */
 void BackToMenu()
 {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -358,6 +482,12 @@ void BackToMenu()
 }
 
 
+
+/**
+ * main - Program Entry
+ * 
+ * Return : 0 if Succ
+ */
 int main(void)
 {
     vector<stClient> AllClientsData;
@@ -405,4 +535,6 @@ int main(void)
                     BackToMenu();
         }
     }while(YourChoice != 6);
+
+    return (0);
 }
