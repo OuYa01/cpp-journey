@@ -1,7 +1,3 @@
-Here's a README file based on your project description:
-
----
-
 # Project: Client Management System
 
 This project implements a **Client Management System** that allows you to store, manage, and retrieve client data. The data is saved in a text file, and you can perform various operations like adding, deleting, and viewing client information.
@@ -13,23 +9,12 @@ This project implements a **Client Management System** that allows you to store,
 - **Delete a Client**: Remove a client from the system using their account number.
 - **Persistent Storage**: All client data is saved to a file (`ClientsData.txt`) for persistent storage.
 
-## File Structure
-
-```
-/ClientManagementSystem
-│── main.cpp               # Entry point of the application, handles user interaction.
-│── client.cpp             # Contains the logic for adding, deleting, and displaying clients.
-│── helpers.cpp            # Utility functions for data handling (e.g., converting data formats).
-│── client.h               # Header file for client structure and function declarations.
-│── ClientsData.txt        # File to store client data.
-│── README.md              # Project documentation.
-```
 
 ## How to Run
 
 1. **Compile the program**:
    ```bash
-   g++ main.cpp client.cpp helpers.cpp -o client_management
+   g++ main.cpp  -o client_management
    ```
 
 2. **Run the program**:
@@ -111,7 +96,3 @@ B01#//#0000#//#Oussama#//#+212608095577#//#20000
 
 - The system allows only one client to be added at a time, but you can keep adding multiple clients one after the other.
 - The client data is stored permanently in `ClientsData.txt`, ensuring that information persists even after the program is closed.
-
----
-
-Feel free to adjust the instructions or add more details as needed for your project!
