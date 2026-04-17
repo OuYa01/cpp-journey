@@ -7,6 +7,11 @@ struct stDate {
     int day;
 };
 
+struct stPeriod {
+    stDate StartDate;
+    stDate EndDate;
+};
+
  
 
 bool isLeapYear(int Year) 
@@ -86,7 +91,27 @@ enDateCompare compareDate1AndDate2(stDate& date1, stDate& date2)
 }
 
 
-bool IsOverlapDates(stDate& date1, stDate& date2)
+bool IsOverlapDates(stPeriod& period1, stPeriod& period2)
 {
+
+    if (compareDate1AndDate2(period2.StartDate, period1.EndDate) == enDateCompare::After)
+        return (false);
     
+    if (compareDate1AndDate2(period2.EndDate, period1.StartDate) == enDateCompare::Before)
+        return (false);
+        
+    return (true);
+}
+
+
+int main(void)
+{
+    stPeriod p1;
+    p1.StartDate = {2022, 02, 01};
+    p1.EndDate = {2022, 02, 10};
+
+    stPeriod p2;
+    p2.StartDate = {2022, 02, 05};
+    p2.EndDate = {2022, 02, 15};
+    cout << IsOverlapDates(p1, p2) << endl;
 }
