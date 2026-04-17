@@ -80,7 +80,7 @@ void PrintData(vector<stClient> Data)
 
 }
 
- vector<stClient> LoadAllClientsDataFromFile(string filename)
+vector<stClient> LoadAllClientsDataFromFile(string filename)
 {
     ifstream ClienData;
 
