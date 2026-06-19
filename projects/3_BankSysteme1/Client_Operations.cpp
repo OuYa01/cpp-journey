@@ -1,5 +1,7 @@
-#include "main.h"
-#include "Transactions.h"
+#include "Headers/main.h"
+#include "Headers/Common.h"
+#include "Headers/users.h"
+#include "Headers/Transactions.h"
 
 
 
