@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -18,6 +19,33 @@ string ReadDateString()
 
     return Date;
 }
+
+std::vector<std::string> splitStringIntoVector(std::string s, std::string delim)
+{
+	std::vector<std::string> v;
+	std::string sword;
+	short pos = 0;
+
+	while ((pos = s.find(delim)) != std::string::npos)
+	{
+		sword = s.substr(0, pos);
+		
+		if (sword != "")
+		{
+			v.push_back(sword);
+		}
+
+		s.erase(0, pos + delim.length());
+	}
+
+	if (s != "")
+	{
+		v.push_back(s);
+	}
+
+	return (v);
+}
+
 
 stDate StringToDate(const std::string& strdate)
 {
@@ -37,6 +65,19 @@ stDate StringToDate(const std::string& strdate)
     return date;
 }
 
+stDate StringToDateV2(const std::string& strdate)
+{
+    stDate date{};
+    vector <string> vDate;
+
+    vDate = splitStringIntoVector(strdate, "/");
+    date.day = stoi(vDate[0]);
+    date.month = stoi(vDate[1]);
+    date.year = stoi(vDate[2]);
+
+    return (date);
+}
+
 string DateToString(const stDate stdate)
 {
     string strdate = to_string(stdate.day) + "/" + to_string(stdate.month) + "/" + to_string(stdate.year);
@@ -48,7 +89,7 @@ string DateToString(const stDate stdate)
 int main(void)
 {
     string StrDate = ReadDateString();
-    stDate Date = StringToDate(StrDate);
+    stDate Date = StringToDateV2(StrDate);
 
     cout << endl;
     cout << "Day: " << Date.day << endl;
