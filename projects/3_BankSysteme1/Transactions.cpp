@@ -20,28 +20,28 @@ void TransactionsSwitch(vector<stClient>& AllClientsData)
 
     do
     {
-        system("cls");
+        system("clear");
         ShowTransactionsMenue();
         cin >> YourChoice;
         switch (YourChoice)
         {
             case 1: 
-                    system("cls");
+                    system("clear");
                     Deposit(AllClientsData);
                     BackToMenu();
                 break;
             case 2:
-                    system("cls");
+                    system("clear");
                     Withdraw(AllClientsData);
                     BackToMenu();
                 break;
             case 3:
-                    system("cls");
+                    system("clear");
                     TotalBalance(AllClientsData);
                     BackToMenu();
                 break;
             case 4:
-                    system("cls");
+                    system("clear");
                 break;
             default:
                     cout << "Choice Not Found, Try Again";

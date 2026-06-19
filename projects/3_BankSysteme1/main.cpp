@@ -8,9 +8,10 @@
  */
 int main(void)
 {
-    vector<stClient> AllClientsData;
-    LoadAllClientsDataFromFile(AllClientsData);
-    MainMenueSwitch(AllClientsData);
+    // vector<stClient> AllClientsData;
+    // LoadAllClientsDataFromFile(AllClientsData);
+    // MainMenueSwitch(AllClientsData);
+    Login();
 
     return (0);
 }

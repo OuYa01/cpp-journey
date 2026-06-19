@@ -16,9 +16,10 @@ void showMenueScreen()
     cout << "\t[4] Upate Client.\n";
     cout << "\t[5] Find Client.\n";
     cout << "\t[6] Transactions menue.\n";
-    cout << "\t[7] Exit.\n";
+    cout << "\t[7] Manage Users.\n";
+    cout << "\t[8] Logout.\n";
     cout << "===============================================\n";
-    cout << "Choose what do you want to do? [1 to 7]?  ";
+    cout << "Choose what do you want to do? [1 to 8]?  ";
 
 }
 
