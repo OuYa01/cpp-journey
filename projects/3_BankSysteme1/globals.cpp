@@ -1,4 +1,4 @@
-#include "main.h"
+#include "Headers/main.h"
 
-string FileName = "ClientsData.txt";
-string UsersFileName = "Users.txt";
+string FileName = "Data/ClientsData.txt";
+string UsersFileName = "Data/Users.txt";
