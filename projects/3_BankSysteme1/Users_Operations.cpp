@@ -1,4 +1,4 @@
-#include "main.h"
+#include "Headers/users.h"
 
 
 
@@ -44,6 +44,16 @@ void LoadAllUsersDataFromFile(vector<stUsers>& AllUsersData)
     UsersData.close();
 }   
 
+void LoadAllUsersDataFromVecToFile(vector<stUsers>& AllUsersData)
+{
+    ofstream UserDataFile(UsersFileName);
+
+    for (stUsers& User : AllUsersData)
+    {
+        UserDataFile << ConverUserToRecordeLine(User);
+    }
+}
+
 bool CheckIfUserExist(stUsers& user, vector<stUsers>& AllUsersData)
 {
     for (stUsers tempuser : AllUsersData)
@@ -63,12 +73,6 @@ bool CheckIfUserExist(stUsers& user, vector<stUsers>& AllUsersData)
     return false;
 }
 
-void ShowLoginScreen()
-{
-    cout << "-------------------------------------------\n";
-    cout << "\t\t Login Screen\n";
-    cout << "-------------------------------------------\n";
-}
 
 void GetUserInfos(stUsers& user)
 {
@@ -78,45 +82,6 @@ void GetUserInfos(stUsers& user)
     cin >> user.PassWord;
 }
 
-
-void showUsersMenueScreen()
-{
-    cout << "===============================================\n";
-    cout << "\t\tUsers Menue Screen\n";
-    cout << "===============================================\n";
-    cout << "\t[1] List Users.\n";
-    cout << "\t[2] Add New User.\n";
-    cout << "\t[3] Delet User.\n";
-    cout << "\t[4] Update User.\n";
-    cout << "\t[5] Find User.\n";
-    cout << "\t[6] Main Menue.\n";
-    cout << "===============================================\n";
-    cout << "Choose what do you want to do? [1 to 6]?  ";
-}
-
-
-void PrintUserCard(stUsers& user)
-{
-    cout << "| " << left << setw(15) << user.UserName;
-    cout << "| " << left << setw(12) << user.PassWord;
-    cout << "| " << left << setw(40) << user.Permission;
-    cout << "\n";
-}
-
-void ShowUsersList(vector<stUsers>& AllUsersList)
-{
-    cout << "\tUsers List ("<< AllUsersList.size() << ") User(s)\n\n";
-    cout << "| " << left << setw(15) << "User Name";
-    cout << "| " << left << setw(12) << "PassWord";
-    cout << "| " << left << setw(40) << "Permissions";
-
-
-    cout << "\n";
-    for (stUsers& user : AllUsersList)
-    {
-         PrintUserCard(user);
-    }
-}
 
 bool UserFound(vector<stUsers>& AllUserData, string& TargetUserName, stUsers& User)
 {
@@ -133,12 +98,12 @@ bool UserFound(vector<stUsers>& AllUserData, string& TargetUserName, stUsers& Us
     }
     return (false);
 }
+
+
 string ConverUserToRecordeLine(stUsers User, string separateur)
 {
     return (User.UserName + separateur + User.PassWord + separateur + to_string(User.Permission) + '\n');
 }
-
-
 
 
 void SetPermissionToUser(stUsers& User)
@@ -239,6 +204,149 @@ void AddNewUser(vector<stUsers>& AllUsersData)
     UserDataFile.close();
 }
 
+
+void DeletUser(vector<stUsers>& AllUsersData, string& TargetUsername)
+{
+    int i;
+
+    for (i = 0; i < AllUsersData.size(); i++)
+    {
+        if (AllUsersData[i].UserName == TargetUsername)
+        {
+            AllUsersData.erase(AllUsersData.begin() + i);
+            break;
+        }
+    }
+
+}
+
+void DeletUserByUserName(vector<stUsers>& AllUsersData)
+{
+    stUsers User;
+    string TargetUsername;
+    char Del;
+
+    cout << "______________________________________________________________________________________________________________________\n\n";
+    cout << "\tDelet User\n";
+    cout << "\n\n______________________________________________________________________________________________________________________\n\n";
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Entre Username: ";
+    getline(cin, TargetUsername);
+    
+    if (TargetUsername == "Admin")
+    {
+        cout << "You can't Delet Admin from the systeme\n";
+        return;
+    }
+
+    if (UserFound(AllUsersData, TargetUsername, User))
+    {
+        PrintUserCard(User);
+        cout << "\nAre you sure You Want To delet this User ? (Y/N)";
+        cin >> Del;
+        if (Del == 'Y' || Del == 'y')
+        {
+            DeletUser(AllUsersData, TargetUsername);
+            LoadAllUsersDataFromVecToFile(AllUsersData);
+            cout << "\nUser Deleted Succ\n";
+        }
+        return ;
+    }
+    cout << "User Not Found!!\n";
+
+}
+
+
+void UpdateUser(vector<stUsers>& AllUsersData, string& TargetUsername)
+{
+
+    for (stUsers& User : AllUsersData)
+    {
+        if (User.UserName == TargetUsername)
+        {
+            User.UserName = TargetUsername;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Entre New UserName : ";
+            getline(cin, User.UserName);
+            cout << "Entre New PassWord: ";
+            getline(cin ,User.PassWord);
+            cout << "Change Permissions: \n";
+            SetPermissionToUser(User);
+  
+            break;
+        }
+    }
+
+}
+
+void UpateUserDataByUserName(vector<stUsers>& AllUsersData)
+{
+    stUsers User;
+    string TargetUserName;
+    char Update;
+
+    cout << "______________________________________________________________________________________________________________________\n\n";
+    cout << "\t\tUpdate User\n";
+    cout << "\n\n______________________________________________________________________________________________________________________\n\n";
+    
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Entre Username: ";
+    getline(cin, TargetUserName);
+
+    if (TargetUserName == "Admin")
+    {
+        cout << "You can't Update Admin Infos\n";
+        return;
+    }
+    if (UserFound(AllUsersData, TargetUserName, User))
+    {
+        PrintUserCard(User);
+        cout << "\nAre you sure You Want To Upate this User ? (Y/N)";
+        cin >> Update;
+        if (Update == 'Y' || Update == 'y')
+        {
+            UpdateUser(AllUsersData, TargetUserName);
+            LoadAllUsersDataFromVecToFile(AllUsersData);
+            cout << "\nUser Updated succ!!\n";
+        }
+        return ;
+    }
+    
+    cout << "\nUser Not Found!!\n";
+}
+
+
+void FindUser(vector<stUsers>& AllUsersData)
+{
+    string TargetUsername;
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Entre Username: ";
+    getline(cin, TargetUsername);
+    if (TargetUsername == "Admin")
+    {
+        cout << "Admin found, But You can't See his Informations.\n";
+        return;
+    }
+    int i;
+
+    for (i = 0; i < AllUsersData.size(); i++)
+    {
+        if (TargetUsername == AllUsersData[i].UserName)
+        {
+            cout << "THe follwoing are User details: \n";
+            cout << "-------------------------------------------------------\n";
+            PrintUserCard(AllUsersData[i]);
+            cout << "-------------------------------------------------------\n";
+            return ;
+        }
+    }
+
+    cout << "User with UserName : " << TargetUsername << " is not found!\n";
+}
+
+
 void ManageUsersMenueSwitch(vector<stUsers>& AllUsersData, vector<stClient>& AllClientData, stUsers& RootUser)
 {
     int YourChoice;
@@ -263,17 +371,17 @@ void ManageUsersMenueSwitch(vector<stUsers>& AllUsersData, vector<stClient>& All
                 break;
             case 3:
                 system("clear");
-                /* code */
+                DeletUserByUserName(AllUsersData);
                 BackToMenu();
                 break;
             case 4:
                 system("clear");
-                /* code */
+                UpateUserDataByUserName(AllUsersData);
                 BackToMenu();
                 break;
             case 5:
                 system("clear");
-                /* code */
+                FindUser(AllUsersData);
                 BackToMenu();
                 break;
             case 6:
@@ -295,35 +403,4 @@ bool CheckAccessPermession(stUsers& RootUser, int PermessionToCheck)
         return (true);
     return (false);
 }
-
-void PrintAccessDenied()
-{
-    cout << "-----------------------------------\n";
-    cout << "\t Access Denied,\nYou Don't Have Permission To Do This,\nPlease contact your admin.\n";
-    cout << "-----------------------------------\n";
-}
-
-void Login()
-{
-    vector<stUsers> AllUsersData;
-    LoadAllUsersDataFromFile(AllUsersData);
-    ShowLoginScreen();
-    stUsers RootUser;
-start:    
-    GetUserInfos(RootUser);
-
-    if (CheckIfUserExist(RootUser, AllUsersData))
-    {
-        vector<stClient> AllClientsData;
-        LoadAllClientsDataFromFile(AllClientsData);
-        MainMenueSwitch(AllClientsData, AllUsersData, RootUser);
-    }
-    else
-    {
-        cout << "Invalide UserName/Password!\n";
-        goto start;
-    }
-}
-
-
 
