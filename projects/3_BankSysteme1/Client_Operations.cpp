@@ -4,56 +4,113 @@
 
 
 
-void MainMenueSwitch(vector<stClient>& AllClientsData)
+void MainMenueSwitch(vector<stClient>& AllClientsData, vector<stUsers>& AllUsersData, stUsers& RootUser)
 {
     int YourChoice;
 
     do
     {
-        system("cls");
+        system("clear");
         showMenueScreen();
         cin >> YourChoice;
         switch (YourChoice)
         {
-            case 1: 
-                    system("cls");
+            case 1:
+                system("clear");
+                if (CheckAccessPermession(RootUser, Permissions::Client_List_p))
+                {
                     ShowClientList(AllClientsData);
-                    BackToMenu();
+                }
+                else
+                {
+                    PrintAccessDenied();
+                }
+                BackToMenu();
                 break;
             case 2:
-                    system("cls");
+                system("clear");
+                if (CheckAccessPermession(RootUser, Permissions::Add_Client_P))
+                {
                     AddClient(AllClientsData);
-                    BackToMenu();
+                }
+                else
+                {
+                    PrintAccessDenied();
+                }
+                BackToMenu();
+
                 break;
             case 3:
-                    system("cls");
+                system("clear");
+                if (CheckAccessPermession(RootUser, Permissions::Delete_Client_p))
+                {
+                    
                     DeletClientByAccountNumber(AllClientsData);
-                    BackToMenu();
+                }
+                else
+                {
+                    PrintAccessDenied();
+                }
+                BackToMenu();
                 break;
             case 4:
-                    system("cls");
+                system("clear");
+                if (CheckAccessPermession(RootUser, Permissions::Update_Client_p))
+                {
                     UpateClientDataByAccountNumber(AllClientsData);
-                    BackToMenu();
+                }
+                else
+                {
+                    PrintAccessDenied();
+                }
+                BackToMenu();
                 break;
             case 5:
-                    system("cls");
+                system("clear");
+                if (CheckAccessPermession(RootUser, Permissions::Find_Client_p))
+                {
                     FindClient(AllClientsData);
-                    BackToMenu();
+                }
+                else
+                {
+                    PrintAccessDenied();
+                }
+                BackToMenu();
                 break;
             case 6:
-                system("cls");
-                TransactionsSwitch(AllClientsData);
-            break;
+                system("clear");
+                if (CheckAccessPermession(RootUser, Permissions::Transactions_p))
+                {
+                    TransactionsSwitch(AllClientsData);
+                }
+                else
+                {
+                    PrintAccessDenied();
+                    BackToMenu();
+                }
+                break;
             case 7:
-                    system("cls");
-                    ExitMenue();
+                if (CheckAccessPermession(RootUser, Permissions::ManageUsers_P))
+                {
+                    ManageUsersMenueSwitch(AllUsersData, AllClientsData, RootUser);
+                }
+                else
+                {
+                    system("clear");
+                    PrintAccessDenied();
+                    BackToMenu();
+                }
+                break;
+            case 8:
+                    system("clear");
+                    Login();
                     exit(0);
                 break;
             default:
                     cout << "Choice Not Found, Try Again";
                     BackToMenu();
         }
-    }while(YourChoice != 7);
+    }while(YourChoice != 8);
 
 }
 
