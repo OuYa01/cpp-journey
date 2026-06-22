@@ -54,15 +54,15 @@ void LoadAllUsersDataFromVecToFile(vector<stUsers>& AllUsersData)
     }
 }
 
-bool CheckIfUserExist(stUsers& user, vector<stUsers>& AllUsersData)
+bool CheckIfUserExist(vector<stUsers>& AllUsersData)
 {
     for (stUsers tempuser : AllUsersData)
     {
-        if (user.UserName == tempuser.UserName) 
+        if (RootUser.UserName == tempuser.UserName) 
         {
-            if (user.PassWord == tempuser.PassWord)
+            if (RootUser.PassWord == tempuser.PassWord)
             {
-                user.Permission = tempuser.Permission;
+                RootUser.Permission = tempuser.Permission;
                 return true;
             }
             else
@@ -74,12 +74,12 @@ bool CheckIfUserExist(stUsers& user, vector<stUsers>& AllUsersData)
 }
 
 
-void GetUserInfos(stUsers& user)
+void GetUserInfos()
 {
     cout << "Enter Username? ";
-    cin >> user.UserName;
+    cin >> RootUser.UserName;
     cout << "Enter PassWord? ";
-    cin >> user.PassWord;
+    cin >> RootUser.PassWord;
 }
 
 
@@ -336,7 +336,7 @@ void FindUser(vector<stUsers>& AllUsersData)
         if (TargetUsername == AllUsersData[i].UserName)
         {
             cout << "THe follwoing are User details: \n";
-            cout << "-------------------------------------------------------\n";
+            cout << "------------------------------------------------f-------\n";
             PrintUserCard(AllUsersData[i]);
             cout << "-------------------------------------------------------\n";
             return ;
@@ -347,7 +347,7 @@ void FindUser(vector<stUsers>& AllUsersData)
 }
 
 
-void ManageUsersMenueSwitch(vector<stUsers>& AllUsersData, vector<stClient>& AllClientData, stUsers& RootUser)
+void ManageUsersMenueSwitch(vector<stUsers>& AllUsersData, vector<stClient>& AllClientData)
 {
     int YourChoice;
 
@@ -385,7 +385,7 @@ void ManageUsersMenueSwitch(vector<stUsers>& AllUsersData, vector<stClient>& All
                 BackToMenu();
                 break;
             case 6:
-                MainMenueSwitch(AllClientData, AllUsersData, RootUser);
+                MainMenueSwitch(AllClientData, AllUsersData);
                 break;
             default:
                 cout << "Choice Not Found, Try Again";
@@ -397,7 +397,7 @@ void ManageUsersMenueSwitch(vector<stUsers>& AllUsersData, vector<stClient>& All
    
 }
 
-bool CheckAccessPermession(stUsers& RootUser, int PermessionToCheck)
+bool CheckAccessPermession(int PermessionToCheck)
 {
     if (RootUser.Permission & PermessionToCheck)
         return (true);

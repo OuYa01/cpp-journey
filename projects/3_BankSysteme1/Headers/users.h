@@ -39,12 +39,12 @@ void ShowUsersList(vector<stUsers>& AllUsersList);
 /*Prototypes of Users Op */
 void Login();
 void LoadAllUsersDataFromFile(vector<stUsers>& AllUsersData);
-void GetUserInfos(stUsers& user);
-bool CheckIfUserExist(stUsers& user, vector<stUsers>& AllUsersData);
-void ManageUsersMenueSwitch(vector<stUsers>& AllUsersData, vector<stClient>& AllClientData, stUsers& RootUser);
+void GetUserInfos();
+bool CheckIfUserExist(vector<stUsers>& AllUsersData);
+void ManageUsersMenueSwitch(vector<stUsers>& AllUsersData, vector<stClient>& AllClientData);
 void SetPermissionToUser(stUsers& User);
 string ConverUserToRecordeLine(stUsers User, string separateur="#//#");
-bool CheckAccessPermession(stUsers& RootUser, int PermessionToCheck);
+bool CheckAccessPermession(int PermessionToCheck);
 bool UserFound(vector<stUsers>& AllUserData, string& TargetUserName, stUsers& User);
 void FindUser(vector<stUsers>& AllUsersData);
 void UpateUserDataByUserName(vector<stUsers>& AllUsersData);

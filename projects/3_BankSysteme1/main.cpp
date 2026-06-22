@@ -8,15 +8,14 @@ void Login()
     vector<stUsers> AllUsersData;
     LoadAllUsersDataFromFile(AllUsersData);
     ShowLoginScreen();
-    stUsers RootUser;
 start:    
-    GetUserInfos(RootUser);
+    GetUserInfos();
 
-    if (CheckIfUserExist(RootUser, AllUsersData))
+    if (CheckIfUserExist(AllUsersData))
     {
         vector<stClient> AllClientsData;
         LoadAllClientsDataFromFile(AllClientsData);
-        MainMenueSwitch(AllClientsData, AllUsersData, RootUser);
+        MainMenueSwitch(AllClientsData, AllUsersData);
     }
     else
     {

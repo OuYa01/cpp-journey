@@ -2,3 +2,4 @@
 
 string FileName = "Data/ClientsData.txt";
 string UsersFileName = "Data/Users.txt";
+stUsers RootUser;

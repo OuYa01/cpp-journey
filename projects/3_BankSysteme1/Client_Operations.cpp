@@ -6,7 +6,7 @@
 
 
 
-void MainMenueSwitch(vector<stClient>& AllClientsData, vector<stUsers>& AllUsersData, stUsers& RootUser)
+void MainMenueSwitch(vector<stClient>& AllClientsData, vector<stUsers>& AllUsersData)
 {
     int YourChoice;
 
@@ -19,7 +19,7 @@ void MainMenueSwitch(vector<stClient>& AllClientsData, vector<stUsers>& AllUsers
         {
             case 1:
                 system("clear");
-                if (CheckAccessPermession(RootUser, Permissions::Client_List_p))
+                if (CheckAccessPermession(Permissions::Client_List_p))
                 {
                     ShowClientList(AllClientsData);
                 }
@@ -31,7 +31,7 @@ void MainMenueSwitch(vector<stClient>& AllClientsData, vector<stUsers>& AllUsers
                 break;
             case 2:
                 system("clear");
-                if (CheckAccessPermession(RootUser, Permissions::Add_Client_P))
+                if (CheckAccessPermession(Permissions::Add_Client_P))
                 {
                     AddClient(AllClientsData);
                 }
@@ -44,7 +44,7 @@ void MainMenueSwitch(vector<stClient>& AllClientsData, vector<stUsers>& AllUsers
                 break;
             case 3:
                 system("clear");
-                if (CheckAccessPermession(RootUser, Permissions::Delete_Client_p))
+                if (CheckAccessPermession(Permissions::Delete_Client_p))
                 {
                     
                     DeletClientByAccountNumber(AllClientsData);
@@ -57,7 +57,7 @@ void MainMenueSwitch(vector<stClient>& AllClientsData, vector<stUsers>& AllUsers
                 break;
             case 4:
                 system("clear");
-                if (CheckAccessPermession(RootUser, Permissions::Update_Client_p))
+                if (CheckAccessPermession(Permissions::Update_Client_p))
                 {
                     UpateClientDataByAccountNumber(AllClientsData);
                 }
@@ -69,7 +69,7 @@ void MainMenueSwitch(vector<stClient>& AllClientsData, vector<stUsers>& AllUsers
                 break;
             case 5:
                 system("clear");
-                if (CheckAccessPermession(RootUser, Permissions::Find_Client_p))
+                if (CheckAccessPermession(Permissions::Find_Client_p))
                 {
                     FindClient(AllClientsData);
                 }
@@ -81,7 +81,7 @@ void MainMenueSwitch(vector<stClient>& AllClientsData, vector<stUsers>& AllUsers
                 break;
             case 6:
                 system("clear");
-                if (CheckAccessPermession(RootUser, Permissions::Transactions_p))
+                if (CheckAccessPermession(Permissions::Transactions_p))
                 {
                     TransactionsSwitch(AllClientsData);
                 }
@@ -92,9 +92,9 @@ void MainMenueSwitch(vector<stClient>& AllClientsData, vector<stUsers>& AllUsers
                 }
                 break;
             case 7:
-                if (CheckAccessPermession(RootUser, Permissions::ManageUsers_P))
+                if (CheckAccessPermession(Permissions::ManageUsers_P))
                 {
-                    ManageUsersMenueSwitch(AllUsersData, AllClientsData, RootUser);
+                    ManageUsersMenueSwitch(AllUsersData, AllClientsData);
                 }
                 else
                 {

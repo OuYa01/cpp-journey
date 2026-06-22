@@ -11,6 +11,7 @@
 
 using namespace std;
 
+
 /**
  * stUsers - its a structure That hold Users of the systeme
  *           , users are the ppl who have access to the systeme
@@ -51,8 +52,10 @@ struct stClient
 };
 
 
+extern stUsers RootUser;
+
 // Common prototypes
-void MainMenueSwitch(vector<stClient>& AllClientsData, vector<stUsers>& AllUsersData, stUsers& RootUser);
+void MainMenueSwitch(vector<stClient>& AllClientsData, vector<stUsers>& AllUsersData);
 vector<string> SplitStringIntoVector(string RecordeLine, string separateur = "#//#");
 string ConverClientToRecordeLine(stClient client, string separateur  = "#//#");
 stClient convertClientRecordeToClient(string RecordeLine);
