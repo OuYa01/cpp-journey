@@ -262,21 +262,27 @@ void Login()
     vector<stClient> AllClientsData;
     bool isLoginFailed;
     LoadAllClientsDataFromFile(AllClientsData);
-    ShowLoginScreen();
-    do
+    
+    while (true)
     {
-        GetClientInfos();
-        isLoginFailed = !CheckIfClientExist(AllClientsData);
 
-        if (!isLoginFailed)
+        ShowLoginScreen();
+        do
         {
-            MainAtmMenueSwitch(AllClientsData);
-        }
-        else
-        {
-            cout << "Invalide UserName/Password!\n";
-        }
+            GetClientInfos();
+            isLoginFailed = !CheckIfClientExist(AllClientsData);
 
-    }while(isLoginFailed);
+            if (!isLoginFailed)
+            {
+                MainAtmMenueSwitch(AllClientsData);
+            }
+            else
+            {
+                cout << "Invalide UserName/Password!\n";
+            }
+
+        }while(isLoginFailed);
+
+    }
 
 }
