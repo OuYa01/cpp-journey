@@ -172,3 +172,11 @@ void GetClientInfos()
     cout << "Enter Pin code? ";
     cin >> CurrentClient.PinCode;
 }
+
+
+void ClearScreen()
+{
+    // \033[2J clears the entire screen
+    // \033[1;1H moves the cursor back to the top-left corner
+    cout << "\033[2J\033[1;1H";
+}

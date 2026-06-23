@@ -34,6 +34,9 @@ extern string FileName;
 extern stClient CurrentClient;
 
 
+
+void ClearScreen();
+
 /*ATM PRINT DETIKES FUNC PROTOTYPES*/
 void ShowLoginScreen();
 void showAtmMenueScreen();

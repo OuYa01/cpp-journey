@@ -82,7 +82,7 @@ void QuickWithdraw(vector<stClient>& AllClientsData)
                 }
                 else
                 {
-                    system("clear");
+                    ClearScreen();
                 }
             }
             else
@@ -139,7 +139,7 @@ void NormalWithdraw(vector<stClient>& AllClientsData)
                 }
                 else 
                 {
-                    system("clear");
+                    ClearScreen();
                 }
             }
             else
@@ -217,33 +217,33 @@ void MainAtmMenueSwitch(vector<stClient>& AllClientsData)
 
     do
     {
-        system("clear");
+        ClearScreen();
         showAtmMenueScreen();
         cin >> YourChoice;
         switch (YourChoice)
         {
             case 1:
-                system("clear");
+                ClearScreen();
                 QuickWithdraw(AllClientsData);
                 BackToMenu();
                 break;
             case 2:
-                system("clear");
+                ClearScreen();
                 NormalWithdraw(AllClientsData);
                 BackToMenu();
                 break;
             case 3:
-                system("clear");
+                ClearScreen();
                 Deposit(AllClientsData);
                 BackToMenu();
                 break;
             case 4:
-                system("clear");
+                ClearScreen();
                 CheckBalance();
                 BackToMenu();
                 break;
             case 5:
-                system("clear");
+                ClearScreen();
                 return;
             default:
                     cout << "Choice Not Found, Try Again";
