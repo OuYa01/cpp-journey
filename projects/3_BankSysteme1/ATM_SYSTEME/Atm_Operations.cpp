@@ -50,47 +50,53 @@ void QuickWithdraw(vector<stClient>& AllClientsData)
     int choice;
     int Towithdraw[8] = {20, 50, 100, 200, 400, 600, 800, 1000};
     char c;
-
-    cout << "-------------------------------------------------------\n";
-    cout << "\t\t Quick Withdraw Screen\n";
-    cout << "-------------------------------------------------------\n";
-    cout << "\t[1] 20  \t[2] 50\n";
-    cout << "\t[3] 100 \t[4] 200\n";
-    cout << "\t[5] 400 \t[6] 600\n";
-    cout << "\t[7] 800 \t[8] 1000\n";
-    cout << "\t[9] Exit\n";
-    cout << "-------------------------------------------------------\n";
-    cout << "Your Balance is " << CurrentClient.accountBalance << endl;
-    cout << "Choose what to withdraw from (1-8) ? ";
-    cin >> choice;
-
-
-
-    if ( choice > 0 && choice < 9)
+    bool transactionDone = false;
+    while(!transactionDone)
     {
-        cout << "Are you sure you want to perform this transaction? (y/n)? ";
-        cin >> c;
-        if (c == 'Y' || c == 'y')
+
+        cout << "-------------------------------------------------------\n";
+        cout << "\t\t Quick Withdraw Screen\n";
+        cout << "-------------------------------------------------------\n";
+        cout << "\t[1] 20  \t[2] 50\n";
+        cout << "\t[3] 100 \t[4] 200\n";
+        cout << "\t[5] 400 \t[6] 600\n";
+        cout << "\t[7] 800 \t[8] 1000\n";
+        cout << "\t[9] Exit\n";
+        cout << "-------------------------------------------------------\n";
+        cout << "Your Balance is " << CurrentClient.accountBalance << endl;
+        cout << "Choose what to withdraw from (1-8) ? ";
+        cin >> choice;
+
+
+
+        if ( choice > 0 && choice < 9)
         {
-            if (Withdraw(AllClientsData ,Towithdraw[choice - 1]) == true)
+            cout << "Are you sure you want to perform this transaction? (y/n)? ";
+            cin >> c;
+            if (c == 'Y' || c == 'y')
             {
-                cout << "Done succssfully. New Balance is : " << CurrentClient.accountBalance << endl;
+                if (Withdraw(AllClientsData ,Towithdraw[choice - 1]) == true)
+                {
+                    cout << "Done succssfully. New Balance is : " << CurrentClient.accountBalance << endl;
+                    transactionDone = true;
+                }
+                else
+                {
+                    system("clear");
+                }
             }
             else
-            {
-                system("clear");
-                QuickWithdraw(AllClientsData);
-            }
-        }
+                break;
 
-    }
-    else if (choice == 9)
-    {
-        BackToMenu();
-    }
-    else
-    {
-        cout << "This choice is not found please enter choice between (1-9)\n";
+        }
+        else if (choice == 9)
+        {
+            break;
+        }
+        else
+        {
+            cout << "This choice is not found please enter choice between (1-9)\n";
+        }
     }
 
 }
@@ -105,33 +111,39 @@ void NormalWithdraw(vector<stClient>& AllClientsData)
 {
     int ToWithdraw;
     char c;
+    bool transactionDone = false;
 
-    cout << "-------------------------------------------------------\n";
-    cout << "\t\t Normal Withdraw Screen\n";
-    cout << "-------------------------------------------------------\n";
-
-start:
-    cout << "Enter an Amount Multiple of  5's? ";
-    cin >> ToWithdraw;
-
-    if (ToWithdraw % 5 != 0)
+    while(!transactionDone)
     {
-        goto start;
-    }
+            cout << "-------------------------------------------------------\n";
+            cout << "\t\t Normal Withdraw Screen\n";
+            cout << "-------------------------------------------------------\n";
 
-    cout << "Are you sure you want to perform this transaction? (y/n)? ";
-    cin >> c;
-    if (c == 'y' || c == 'Y')
-    {
-        if (Withdraw(AllClientsData, ToWithdraw) == true)
-        {
-            cout << "Done succssfully. New Balance is : " << CurrentClient.accountBalance << endl;
-        }
-        else 
-        {
-            system("clear");
-            NormalWithdraw(AllClientsData);
-        }
+            do
+            {
+                cout << "Enter an Positive Amount Multiple of  5's? ";
+                cin >> ToWithdraw;
+
+            } while (ToWithdraw % 5 != 0 || ToWithdraw <= 0);
+
+
+
+            cout << "Are you sure you want to perform this transaction? (y/n)? ";
+            cin >> c;
+            if (c == 'y' || c == 'Y')
+            {
+                if (Withdraw(AllClientsData, ToWithdraw) == true)
+                {
+                    cout << "Done succssfully. New Balance is : " << CurrentClient.accountBalance << endl;
+                    transactionDone = true;
+                }
+                else 
+                {
+                    system("clear");
+                }
+            }
+            else
+                break;
     }
 
 }
@@ -160,16 +172,17 @@ void Deposit(vector<stClient>& AllClientsData)
     int depo;
     char c;
 
+
     cout << "-------------------------------------------------------\n";
     cout << "\t\t Deposit Screen\n";
     cout << "-------------------------------------------------------\n";
 
-start:
-    cout << "Enter a positive deposite amount? ";
-    cin >> depo;
+    do
+    {
+        cout << "Enter a positive deposite amount? ";
+        cin >> depo;
 
-    if (depo < 0)
-        goto start;
+    } while (depo < 0);
 
     cout << "Are you sure you want to perform this transaction? (y/n)? ";
     cin >> c;
@@ -231,9 +244,7 @@ void MainAtmMenueSwitch(vector<stClient>& AllClientsData)
                 break;
             case 5:
                 system("clear");
-                Login();
-                BackToMenu();
-                break;
+                return;
             default:
                     cout << "Choice Not Found, Try Again";
                     BackToMenu();
@@ -249,18 +260,23 @@ void MainAtmMenueSwitch(vector<stClient>& AllClientsData)
 void Login()
 {
     vector<stClient> AllClientsData;
+    bool isLoginFailed;
     LoadAllClientsDataFromFile(AllClientsData);
     ShowLoginScreen();
-start:    
-    GetClientInfos();
+    do
+    {
+        GetClientInfos();
+        isLoginFailed = !CheckIfClientExist(AllClientsData);
 
-    if (CheckIfClientExist(AllClientsData))
-    {
-        MainAtmMenueSwitch(AllClientsData);
-    }
-    else
-    {
-        cout << "Invalide UserName/Password!\n";
-        goto start;
-    }
+        if (!isLoginFailed)
+        {
+            MainAtmMenueSwitch(AllClientsData);
+        }
+        else
+        {
+            cout << "Invalide UserName/Password!\n";
+        }
+
+    }while(isLoginFailed);
+
 }
